@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Udacity Neighborhood Map</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/slidebars.min.css">
+</head>
+
+<body>
+    <!-- slidebar start -->
+    <div off-canvas="slidebar-left left reveal">
+        <div class="slidebar">
+            <div class="slidebar-title">
+                Barts Locations
+            </div>
+            <div class="row slidebar-filter">
+                <input type="text" class="form-control" placeholder="Where do u want to know?">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+            <div class="slidebar-content" data-bind="foreach: locations">
+                <div class="location" data-bind="text: name,click: $parent.click">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slidebar end -->
+    <!-- content start -->
+    <div canvas="container">
+        <div class="container">
+            <!-- nav start -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <a id="menu" class="navbar-brand" href="#">
+                        <div class="menu-icon"></div>
+                    </a>
+                </div>
+            </nav>
+            <!-- nav end -->
+        </div>
+        <!-- map start -->
+        <div id="map">
+        </div>
+        <!-- map end -->
+    </div>
+    <!-- content end -->
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="js/slidebars.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/knockout-3.4.1.debug.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWkV65FigC7jAODidfgmUgzF72cJFL8E&callback=initMap">
+    </script> -->
+</body>
+
+</html>
