@@ -20,11 +20,11 @@
                 Barts Locations
             </div>
             <div class="row slidebar-filter">
-                <input type="text" class="form-control" placeholder="Where do u want to know?">
-                <button type="submit" class="btn btn-primary">Filter</button>
+                <input type="text" class="form-control" data-bind="textInput:filterContent" placeholder="Where do u want to know?">
+                <button class="btn btn-primary" data-bind="click:filter">Filter</button>
             </div>
             <div class="slidebar-content" data-bind="foreach: locations">
-                <div class="location" data-bind="text: name,click: $parent.click">
+                <div class="location" data-bind="text: name,click:$parent.click">
                 </div>
             </div>
         </div>
@@ -52,10 +52,10 @@
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/slidebars.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/knockout-3.4.1.debug.js"></script>
+    <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWkV65FigC7jAODidfgmUgzF72cJFL8E&callback=initMap">
-    </script> -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWkV65FigC7jAODidfgmUgzF72cJFL8E&callback=initMap">
+    </script>
 </body>
 
 </html>
