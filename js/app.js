@@ -165,7 +165,7 @@ function asyncContent(marker, title) {
         infowindow.open(map, marker);
 
     }).fail(function(e) {
-        infowindow.setContent(e);
+        infowindow.setContent("networkError,please check it. please!");
         infowindow.open(map, marker);
     });
 }
