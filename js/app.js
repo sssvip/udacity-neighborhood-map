@@ -126,7 +126,6 @@ function initMap() {
             position: locations[i].location,
             map: map,
             title: locations[i].name,
-
         });
         markers.push(marker);
         markers[i].addListener('click', function() {
@@ -145,9 +144,30 @@ function toggleBounce(marker) {
     } else {
         clearAllBounceAndInfo();
         marker.setAnimation(google.maps.Animation.BOUNCE);
-        infowindow.setContent(marker.title);
-        infowindow.open(map, marker);
+        asyncContent(marker, marker.title);
     }
+}
+
+function asyncContent(marker, title) {
+    var client_id = 'QRNYYHZKALJLG2IIRT4OCLLYZTK3XPKON4BOCZBT5OB2IET2',
+        client_secret = 'XSEUOKQF0BCZWTUQWOCTZ4YS0LEAJJ1YJCXY4ADLTGYRRJEO'
+    var request = $.ajax({
+        url: 'https://api.foursquare.com/v2/venues/search',
+        dataType: 'json',
+        data: 'limit=1' +
+            '&ll=40.707496,-73.990774' +
+            '&query=' + title +
+            '&client_id=' + client_id +
+            '&client_secret=' + client_secret +
+            '&v=20161113'
+    }).done(function(data) {
+        infowindow.setContent(data.response.venues[0].name);
+        infowindow.open(map, marker);
+
+    }).fail(function(e) {
+        infowindow.setContent(e);
+        infowindow.open(map, marker);
+    });
 }
 
 function showMarkers(tempMarkers) {
