@@ -4,9 +4,9 @@ var slidebar = new slidebars();
 // Initialize Slidebars
 slidebar.init();
 // Left Slidebar controls
-$('#menu').on('click', function(event) {
-    slidebar.toggle('slidebar-left');
-});
+// $('#menu').on('click', function(event) {
+//     slidebar.toggle('slidebar-left');
+// });   switch to let knockout to manage this toggle
 //auto show the slidebar
 slidebar.open('slidebar-left');
 //remain the hover effect
@@ -58,31 +58,32 @@ function ViewModel() {
         copyLocations.push(locations[i]);
     }
     self.locations = ko.observableArray(copyLocations);
-    self.markers = ko.observableArray();
-    self.infoWindows = ko.observableArray();
-    self.networkError=ko.observable(false);
-    self.filterContent = '';
-    //
+    self.networkError = ko.observable(false);
+    self.filterContent = ko.observable('');
+    self.menu = function() {
+        slidebar.toggle('slidebar-left');
+    }
     self.click = function(location) {
-        var index = self.locations.indexOf(location);
-        toggleBounce(markers[index], infoWindows[index]);
+        var index = locations.indexOf(location);
+        toggleBounce(markers[index]);
     }
     self.filter = function() {
         //filter is none
-        if (self.filterContent == '') {
+        if (self.filterContent() == '') {
             if (self.locations.length != locations.length) {
                 self.locations.removeAll();
                 for (var i = 0; i < locations.length; i++) {
                     self.locations.push(locations[i]);
                 }
             }
+            showMarkers(markers);
             clearAllBounceAndInfo();
             return;
         }
         //filter data
         var tempLocations = [];
         for (var i = 0; i < locations.length; i++) {
-            if (locations[i].name.toLowerCase().indexOf(self.filterContent.toLowerCase()) > -1) {
+            if (locations[i].name.toLowerCase().indexOf(self.filterContent().toLowerCase()) > -1) {
                 tempLocations.push(locations[i]);
             }
         }
@@ -102,13 +103,16 @@ function ViewModel() {
         }
         showMarkers(tempMarkers);
     }
+    self.filterContent.subscribe(function(newValue) {
+        self.filter();
+    })
 }
 
 /*Model and ModelView  end*/
 
 /* map start*/
 var map;
-var infoWindows = [];
+var infoWindow; //only one infoWindow
 var markers = [];
 
 function initMap() {
@@ -125,22 +129,16 @@ function initMap() {
 
         });
         markers.push(marker);
-        var infowindow = new google.maps.InfoWindow({
-            content: locations[i].name,
-        });
-        infoWindows.push(infowindow);
         markers[i].addListener('click', function() {
-            toggleBounce(this, infowindow);
+            toggleBounce(this);
         });
     }
-    //push into vm
-    for (var i = 0; i < locations.length; i++) {
-        vm.markers.push(markers[i]);
-        vm.infoWindows.push(infoWindows[i]);
-    }
+    infowindow = new google.maps.InfoWindow({
+        content: '',
+    });
 }
 
-function toggleBounce(marker, infowindow) {
+function toggleBounce(marker) {
     if (marker.getAnimation() != null) {
         marker.setAnimation(null);
         infowindow.close(map, marker);
@@ -152,17 +150,24 @@ function toggleBounce(marker, infowindow) {
     }
 }
 
-function showMarkers(markers) {
+function showMarkers(tempMarkers) {
     clearAllBounceAndInfo();
+    //hide the all first
     for (var i = 0; i < markers.length; i++) {
-        markers[i].setAnimation(google.maps.Animation.BOUNCE);
+        markers[i].setMap(null);
     }
+    //show the should show
+    for (var i = 0; i < tempMarkers.length; i++) {
+        tempMarkers[i].setMap(map);
+        tempMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+    }
+
 }
 
 function clearAllBounceAndInfo() {
     for (var i = 0; i < locations.length; i++) {
         markers[i].setAnimation(null);
-        infoWindows[i].close(map, markers[i]);
+        infowindow.close(map, markers[i]);
     }
 }
 /* map end*/
@@ -170,6 +175,6 @@ function clearAllBounceAndInfo() {
 var vm = new ViewModel();
 ko.applyBindings(vm);
 
-function initMapError(){
+function initMapError() {
     vm.networkError(true);
 }

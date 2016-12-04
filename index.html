@@ -6,15 +6,15 @@
     <title>Udacity Neighborhood Map</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/app.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="css/slidebars.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/slidebars.min.css">
 </head>
 
 <body>
     <!-- slidebar start -->
-    <div off-canvas="slidebar-left left reveal">
+    <aside off-canvas="slidebar-left left reveal">
         <div class="slidebar">
             <div class="slidebar-title">
                 Barts Locations
@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" data-bind="textInput:filterContent" placeholder="Where do u want to know?">
                 <button class="btn btn-primary" data-bind="click:filter">Filter</button>
             </div>
-            <div class="errorMessage" data-bind="visible: networkError">
+            <div class="error-message" data-bind="visible: networkError">
                 May be met the network trouble,please try again later.
             </div>
             <div class="slidebar-content" data-bind="foreach: locations">
@@ -31,16 +31,16 @@
                 </div>
             </div>
         </div>
-    </div>
+    </aside>
     <!-- slidebar end -->
     <!-- content start -->
-    <div canvas="container">
+    <main canvas="container">
         <div class="container">
             <!-- nav start -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <a id="menu" class="navbar-brand" href="#">
-                        <div class="menu-icon"></div>
+                        <div class="menu-icon" data-bind="click:menu"></div>
                     </a>
                 </div>
             </nav>
@@ -50,13 +50,13 @@
         <div id="map">
         </div>
         <!-- map end -->
-    </div>
+    </main>
     <!-- content end -->
-    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="js/slidebars.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/knockout-3.4.1.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/slidebars.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/knockout-3.4.1.js"></script>
+    <script src="js/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWkV65FigC7jAODidfgmUgzF72cJFL8E&callback=initMap" onerror="initMapError()">
     </script>
 </body>
