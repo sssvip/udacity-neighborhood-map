@@ -60,6 +60,7 @@ function ViewModel() {
     self.locations = ko.observableArray(copyLocations);
     self.markers = ko.observableArray();
     self.infoWindows = ko.observableArray();
+    self.networkError=ko.observable(false);
     self.filterContent = '';
     //
     self.click = function(location) {
@@ -168,3 +169,7 @@ function clearAllBounceAndInfo() {
 
 var vm = new ViewModel();
 ko.applyBindings(vm);
+
+function initMapError(){
+    vm.networkError(true);
+}
