@@ -2,6 +2,10 @@
 > this practice project is form udacity
 
 
+## preview
+
+![preview](preview.gif)
+
 ## How to start?
 
  1. you need has a browser. I think you have.
