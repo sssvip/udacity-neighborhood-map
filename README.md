@@ -9,10 +9,10 @@
 
 |Use|Why|
 |:--:|:--:|
-|jquery-2.2.4|for ajax|
-|slidebars|for slidebar|
-|bootstrap|for UI|
-|knockout|observe pattern to bind data and auto update UI |
+|jquery-2.2.4.min.js|for ajax|
+|slidebars.js|for slidebar|
+|bootstrap js and css|for UI|
+|knockout.js|observe pattern to bind data and auto update UI |
 |google map api|get the maps.|
 |and a other third-part api.|get some asyc data|
 
