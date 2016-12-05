@@ -1,10 +1,20 @@
 # fullstack udacity-neighborhood-map
-> this practice project is form udacity
-
+> this practice project is for udacity Full Stack Web Developer Nano Degree.
 
 ## preview
 
 ![preview](preview.gif)
+
+## What use?
+
+|Use|Why|
+|:--:|:--:|
+|jquery-2.2.4|for ajax|
+|slidebars|for slidebar|
+|bootstrap|for UI|
+|knockout|observe pattern to bind data and auto update UI |
+|google map api|get the maps.|
+|and a other third-part api.|get some asyc data|
 
 ## How to start?
 
