@@ -13,8 +13,8 @@
 |slidebars.js|for slidebar|
 |bootstrap js and css|for UI|
 |knockout.js|observe pattern to bind data and auto update UI |
-|google map api|get the maps.|
-|and a other third-part api.|get some asyc data|
+|google map api|get the maps|
+|and a other third-part api|get some asyc data|
 
 ## How to start?
 
